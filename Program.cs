@@ -17,7 +17,11 @@ namespace RamFilmShow
 
             Console.WriteLine($"Выбран автоматический размер диска: {size}GB");
 
-            await OsfMountRamDrive.ForceUnmount(DL); // Размонтируем, если уже монтировали
+            if(Path.Exists(filesPath))
+            {
+                Console.WriteLine($"Целевой диск ({filesPath}) уже монтирован. Размонтирую ...");
+                await OsfMountRamDrive.ForceUnmount(DL); // Размонтируем, если уже монтировали
+            }
 
             Console.Write("Введите ссылку на видео, которое качаем: ");
             var url = Console.ReadLine();
